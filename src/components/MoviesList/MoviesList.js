@@ -16,11 +16,12 @@ class MoviesList extends Component {
   render() {
     return (
       <div className="movieItems">
-        <h2>Movies to See</h2>
+        <h2>Movies to Watch</h2>
         <div className="movieList">
             {this.props.reduxState.setMovies.map( (movie) => {
                 return (
                 <div key={movie.id}>
+                    <img className="MovieImage" src={movie.poster} alt="movie"></img> 
                     <p>{movie.title}</p>
                 </div>
                 )
