@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class MoviesList extends Component {
   // Renders the entire app on the DOM
@@ -21,7 +22,9 @@ class MoviesList extends Component {
             {this.props.reduxState.setMovies.map( (movie) => {
                 return (
                 <div key={movie.id}>
+                    <Link to={`/details/${movie.id}`} className="Link">
                     <img className="MovieImage" src={movie.poster} alt="movie"></img> 
+                    </Link>
                     <p>{movie.title}</p>
                 </div>
                 )

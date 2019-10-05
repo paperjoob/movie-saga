@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Movies from '../Movies/Movies';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 
 class App extends Component {
@@ -18,7 +19,8 @@ class App extends Component {
                 <button> <Link to="/" className="link">Home</Link></button>
               </div>
           </header>
-            <Route exact path='/' component = {Movies}/>
+            <Route exact path='/' component = {Movies} />
+            <Route exact path='/details/:id' component = {MovieDetails} />
         </div>
       </Router>
     );
