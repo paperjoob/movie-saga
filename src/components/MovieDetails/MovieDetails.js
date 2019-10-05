@@ -44,6 +44,8 @@ class MovieDetails extends Component {
 
         return (
             <div className="DetailsDiv">
+                <button onClick={this.handleBack}>Back to Home</button>
+                <button onClick={this.handleEdit}>Edit</button>
                 <h2>Movie Details</h2>
                 {/* <div>
                     {this.props.reduxState.detailsReducer.map( (movie) => {
@@ -55,10 +57,6 @@ class MovieDetails extends Component {
                     })}
                 </div> */}
                 {displayDetails}
-
-                <br />
-                <button onClick={this.handleBack}>Back to Home</button>
-                <button onClick={this.handleEdit}>Edit</button>
             </div>
         )
     }

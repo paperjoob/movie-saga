@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 class EditMovie extends Component {
 
+    // keeps changes made to input and textareas
     inputChange = (event, propertyName) => {
         console.log('inPutChange', event.target.value);
     }
