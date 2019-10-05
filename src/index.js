@@ -29,9 +29,9 @@ function* fetchMovies() {
 }
 
 // Generator Function to Grab Details from Server
-function* grabDetails() {
+function* grabDetails(action) {
     try{
-        const response = yield axios.get(`/api/plant/details/${action.payload}`);
+        const response = yield axios.get(`/api/movies/details/${action.payload}`);
         yield put( {type: 'GRAB_MOVIE_DETAILS', payload: response.data} );
     } catch (error) {
         console.log('Error grabbing details', error);

@@ -5,7 +5,7 @@ const router = express.Router();
 
 // GET Request
 router.get('/', (req, res) => {
-    const queryText = 'SELECT id, title, poster FROM "movies";';
+    const queryText = 'SELECT * FROM "movies";';
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
@@ -15,10 +15,11 @@ router.get('/', (req, res) => {
   }); // end router.get for movies
 
 // GET Request to display Details
-router.get('/details:id', (req, res) => {
-    const queryText = `SELECT movies.title, description, genres.name from "movie_genre"
+router.get('/details/:id', (req, res) => {
+    const queryText = `SELECT * from "movie_genre"
     JOIN "movies" ON "movies".id = "movie_genre".movies_id
-    JOIN "genres" ON "genres".id = "movie_genre".genres_id;`;
+    JOIN "genres" ON "genres".id = "movie_genre".genres_id
+    WHERE "movies".id = $1;`;
     pool.query(queryText, [req.params.id])
     .then( (result) => { res.send(result.rows); })
     .catch( (error) => {
