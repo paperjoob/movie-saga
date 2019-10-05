@@ -22,7 +22,7 @@ class MovieDetails extends Component {
     // when clicked, handleEdit takes you to the Edit page
     handleEdit = () => {
         console.log('in EDIT');
-        this.props.history.push('/api/movies/edit');
+        this.props.history.push('/edit');
     }
 
     render() {
