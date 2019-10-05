@@ -3,6 +3,7 @@ import Movies from '../Movies/Movies';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import EditMovie from '../EditMovie/EditMovie';
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           </header>
             <Route exact path='/' component = {Movies} />
             <Route exact path='/details/:id' component = {MovieDetails} />
+            <Route exact path='/edit' component = {EditMovie} />
         </div>
       </Router>
     );
