@@ -43,7 +43,8 @@ class MovieDetails extends Component {
         })
 
         return (
-            <div>
+            <div className="DetailsDiv">
+                <h2>Movie Details</h2>
                 {/* <div>
                     {this.props.reduxState.detailsReducer.map( (movie) => {
                         return (

@@ -21,10 +21,23 @@
   font-size: large;
 }
 
+body {
+  background-color: gainsboro;
+}
+
+.MovieImage {
+  border-radius: 9px;
+}
+
+.MovieImage:hover {
+  opacity: 0.6;
+}
+
 .Welcome {
   opacity: 0.9;
   color: white;
   font-size: 50px;
+  font-weight: bolder;
 }
 
 @keyframes App-logo-spin {

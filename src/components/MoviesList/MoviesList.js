@@ -40,7 +40,7 @@ class MoviesList extends Component {
 
     return (
       <div className="movieItems">
-        <h2>Movies to Watch</h2>
+        <h2>My Movie List</h2>
         <div className="movieList">
             {this.props.reduxState.setMovies.map( (movie) => {
                 return (
@@ -48,10 +48,11 @@ class MoviesList extends Component {
                     <Grid container className={classes.root} spacing= {16} justify="center">
                         <Grid item xs={5}>
                                 <Paper>    
+                                    <p><strong>{movie.title}</strong></p>
                                     <Link to={`/details/${movie.id}`} className="Link">
                                     <img className="MovieImage" src={movie.poster} alt="movie"></img> 
                                     </Link>
-                                    <p>{movie.title}</p>
+                                    <br />
                                     <IconButton aria-label="Add to favorites">
                                         <FavoriteIcon />
                                     </IconButton>
