@@ -23,7 +23,7 @@ class MovieDetails extends Component {
     // when clicked, handleEdit takes you to the Edit page
     handleEdit = () => {
         console.log('in EDIT');
-        this.props.history.push('/edit');
+        this.props.history.push(`/edit/${this.props.match.params.id}`);
     }
 
     getGenres = () => {
@@ -40,7 +40,7 @@ class MovieDetails extends Component {
                     <br />
                     <p><strong>Title:</strong></p> {movie.title}
                     <br />
-                    Description: {movie.description}
+                    <p><strong>Description:</strong></p> {movie.description}
                 </div>
             )
         })
@@ -50,12 +50,14 @@ class MovieDetails extends Component {
                 <button onClick={this.handleBack}>Back to Home</button>
                 <button onClick={this.handleEdit}>Edit</button>
                 <h2>Movie Details</h2>
-                {displayDetails}
+                <div className="DisplayDetailsDiv">
+                    {displayDetails}
+                </div>
                 <p><strong>Genres:</strong></p>
                 <div>
-                    {this.props.reduxState.setGenres.map( (movies) => {
+                    {this.props.reduxState.setGenres.map( (movies,id) => {
                         return (
-                            <div key={movies.id}>
+                            <div key={id}>
                                 {movies.name}
                             </div>
                         )

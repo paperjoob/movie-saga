@@ -47,7 +47,7 @@ class App extends Component {
             </header>
               <Route exact path='/' component = {Movies} />
               <Route exact path='/details/:id' component = {MovieDetails} />
-              <Route exact path='/edit' component = {EditMovie} />
+              <Route exact path='/edit/:id' component = {EditMovie} />
           </div>
         </Router>
       </MuiThemeProvider>
