@@ -43,13 +43,15 @@ class EditMovie extends Component {
                 <>
                 <div key={id}>
                         <form id="changeForm" onSubmit={this.updateMovie} >
-                        <input onChange={(event) => {this.inputChange(event, 'title')}} placeholder={movie.title}></input>
+                        <input onChange={(event) => {this.inputChange(event, 'title')}} defaultValue={movie.title}></input>
+                        <br />
+                        <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" defaultValue={movie.description}></textarea>
+                        <br />
+                        <button onClick={this.saveEdit} type="submit">Save</button>
                         </form>
                         <br />
-                        <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" placeholder={movie.description}></textarea>
                 </div>
                 <button onClick={this.handleBack}>Cancel</button>
-                <button onClick={this.saveEdit}>Save</button>
                 </>
             )
         })
