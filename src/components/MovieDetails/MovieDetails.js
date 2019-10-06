@@ -6,6 +6,7 @@ class MovieDetails extends Component {
     // Renders the details on the DOM
     componentDidMount() {
         this.getMovieById();
+        this.getGenres();
     }
 
     // Sends a dispatch to the Saga Watcher for the Grab Details type to match the id
@@ -25,6 +26,10 @@ class MovieDetails extends Component {
         this.props.history.push('/edit');
     }
 
+    getGenres = () => {
+        this.props.dispatch({ type: 'FETCH_GENRES', payload: this.props.match.params.id })
+    }
+
     render() {
 
         // loop through movie details
@@ -33,11 +38,9 @@ class MovieDetails extends Component {
                 <div key={movie.id}>
                     <img src= {movie.poster} alt="moviepicture"/>
                     <br />
-                    Title: {movie.title}
+                    <p><strong>Title:</strong></p> {movie.title}
                     <br />
                     Description: {movie.description}
-                    <br />
-                    Genres: {movie.name}
                 </div>
             )
         })
@@ -47,16 +50,17 @@ class MovieDetails extends Component {
                 <button onClick={this.handleBack}>Back to Home</button>
                 <button onClick={this.handleEdit}>Edit</button>
                 <h2>Movie Details</h2>
-                {/* <div>
-                    {this.props.reduxState.detailsReducer.map( (movie) => {
+                {displayDetails}
+                <p><strong>Genres:</strong></p>
+                <div>
+                    {this.props.reduxState.setGenres.map( (movies) => {
                         return (
-                            <div key={movie.id}>
-                                Title: {movie.title}
+                            <div key={movies.id}>
+                                {movies.name}
                             </div>
                         )
                     })}
-                </div> */}
-                {displayDetails}
+                </div>
             </div>
         )
     }
