@@ -5,37 +5,21 @@ class EditMovie extends Component {
 
     state = {
         editMovie: {
+            id: this.props.match.params.id,
             title: '',
             description: ''
         }
     }
 
-        // Renders the details on the DOM
-        componentDidMount() {
-            this.getMovie();
-        }
-    
-        // Sends a dispatch to the Saga Watcher for the Grab Details type to match the id
-        getMovie = () => {
-            this.props.dispatch( {type: 'FETCH_DETAILS_EDIT', payload: this.props.match.params.id })
-        }
-
     // keeps changes made to input and textareas
     inputChange = (event, propertyName) => {
-        console.log('inPutChange', event.target.value);
+        console.log('inPutChange', event.target.value); 
         this.setState({
             editMovie: {
-                ...this.setState.editMovie,
-                [propertyName]: event.target.value
-            }
+            ...this.state.editMovie,
+            [propertyName]: event.target.value
+        }
         })
-    }
-
-    updateMovie = (event) => {
-        console.log('in updateMovie');
-        event.preventDefault();
-        this.props.dispatch( {type: 'UPDATE_MOVIE', payload: this.state.editMovie})
-        alert('Update Successful');
     }
 
     // navigate back to the details page
@@ -45,24 +29,26 @@ class EditMovie extends Component {
     }
 
     // save changes made in edit
-    saveEdit = () => {
+    saveEdit = (event) => {
+        event.preventDefault();
         console.log('Save');
+        this.props.dispatch( { type: 'UPDATE_MOVIE', payload: this.state.editMovie})
     }
 
     render() {
         
         // map through the movie title and description in a form format
-        const movieDisplay = this.props.reduxState.detailsReducer.map( (movie) => {
+        const movieDisplay = this.props.reduxState.detailsReducer.map( (movie, id) => {
             return (
                 <>
-                <div key={movie.id}>
-                        <form id="changeForm" onSubmit={this.updateMovie}>
-                        <input onChange={(event) => {this.inputChange(event, 'title')}} placeholder={movie.title} value={this.state.editMovie.name}></input>
+                <div key={id}>
+                        <form id="changeForm" onSubmit={this.updateMovie} >
+                        <input onChange={(event) => {this.inputChange(event, 'title')}} placeholder={movie.title}></input>
                         </form>
                         <br />
                         <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" placeholder={movie.description}></textarea>
                 </div>
-                <button onClick={this.handleBack}>Cancel Change</button>
+                <button onClick={this.handleBack}>Cancel</button>
                 <button onClick={this.saveEdit}>Save</button>
                 </>
             )

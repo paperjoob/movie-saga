@@ -48,12 +48,13 @@ router.get('/genres/:id', (req, res) => {
 }); // end router.get for Details
 
 // PUT Request to Update Title/Description
-router.put('/edit/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const updatedMovie = req.body;
   const queryText = `UPDATE "movies" SET "title" = $1, "description" = $2 WHERE "id" = $3`;
   const queryValues = [
-    updatedMovie.name,
-    updatedMovie.description
+    updatedMovie.title,
+    updatedMovie.description,
+    req.params.id
   ];
   pool.query(queryText, queryValues)
   .then( () => {res.sendStatus(200)})

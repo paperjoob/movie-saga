@@ -17,7 +17,6 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies);
     yield takeEvery('GRAB_DETAILS', grabDetails);
     yield takeEvery('FETCH_GENRES', fetchGenres);
-    yield takeEvery('FETCH_DETAILS_EDIT', fetchDetailsFromEdit);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
 }
 
@@ -49,25 +48,17 @@ function* grabDetails(action) {
     } catch (error) {
         console.log('Error grabbing details', error);
     }
-}
+} // end get details
 
-// Generator Function to Grab Details from Server
-function* fetchDetailsFromEdit(action) {
-    try{
-        const response = yield axios.get(`/api/movies/edit/${action.payload}`);
-        yield put( {type: 'GRAB_MOVIE_DETAILS', payload: response.data} );
-    } catch (error) {
-        console.log('Error grabbing details', error);
-    }
-}
-
+// Saga for PUT request
 function* updateMovie(action) {
     try {
-        yield axios.put('/api/movies/', action.payload);
+        yield axios.put(`/api/movies/${action.payload.id}`, action.payload);
+        console.log(action.payload)
     } catch (error) {
-        console.log('error in updateMovie', error);
+        console.log('--Error in updateMovie Reducer --', error);
     }
-}
+} // end put request
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
