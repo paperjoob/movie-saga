@@ -16,16 +16,15 @@ class MovieDetails extends Component {
 
     // when clicked, handleBack takes you to the home page
     handleBack = () => {
-        console.log('in handleBack');
         this.props.history.push('/');
     }
 
     // when clicked, handleEdit takes you to the Edit page
     handleEdit = () => {
-        console.log('in EDIT');
         this.props.history.push(`/edit/${this.props.match.params.id}`);
     }
 
+    // Sends a dispatch to the Saga Watcher for the Fetch Genres type to get genres
     getGenres = () => {
         this.props.dispatch({ type: 'FETCH_GENRES', payload: this.props.match.params.id })
     }

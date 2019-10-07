@@ -13,7 +13,6 @@ class UpdateEdits extends Component {
 
     // keeps changes made to input and textareas
     inputChange = (event, propertyName) => {
-        console.log('inPutChange', event.target.value); 
         this.setState({
             movieToUpdate: {
             ...this.state.movieToUpdate,
@@ -24,7 +23,6 @@ class UpdateEdits extends Component {
 
     // navigate back to the details page
     handleBack = () => {
-        console.log('in handleBack');
         this.props.history.push(`/details/${this.props.match.params.id}`);
     }
 
@@ -33,7 +31,6 @@ class UpdateEdits extends Component {
         event.preventDefault();
         this.props.dispatch( { type: 'UPDATE_MOVIE', payload: this.state.movieToUpdate});
         this.props.getMovieById();
-        console.log('in SaveEdit', event);
         alert('Update successful');
     }
 
@@ -44,7 +41,7 @@ class UpdateEdits extends Component {
             return (
                 <>
                 <div key={movie.id}>
-                        <form id="changeForm" onSubmit={this.updateMovie} >
+                        <form id="changeForm" >
                         <input onChange={(event) => {this.inputChange(event, 'title')}} value={this.state.movieToUpdate.title}></input>
                         <br />
                         <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" value={this.state.movieToUpdate.description}></textarea>
@@ -60,7 +57,6 @@ class UpdateEdits extends Component {
 
         return (
             <div>
-                <h2>Edit:</h2>
                 {movieDisplay}
                 {/* <pre>{JSON.stringify(this.state)}</pre>  */}
             </div>

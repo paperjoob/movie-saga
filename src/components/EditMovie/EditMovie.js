@@ -18,10 +18,10 @@ class EditMovie extends Component {
         this.props.dispatch( {type: 'GRAB_DETAILS', payload: this.props.match.params.id })
     }
 
+    // when clicked, the updateform will display so users can make changes to movie
     handleUpdate = () => {
         this.setState({displayUpdateForm: true})
       }
-
 
     render() {
         
@@ -30,11 +30,15 @@ class EditMovie extends Component {
             return (
                 <>
                 <div key={movie.id}>
-                        <p>Name: {movie.title}</p>
-                        <br />
-                        <p>Description: {movie.description}</p>
-                        <br />
-                        <button onClick={() => { this.handleUpdate() }}>Make Changes</button>
+                    Title:
+                    <br />
+                    <input placeholder={movie.title}></input>
+                    <br />
+                    Description:
+                    <br />
+                    <textarea rows="15" cols="60" placeholder={movie.description}></textarea>
+                    <br />
+                    <button onClick={() => { this.handleUpdate() }}>Make Changes</button>
                 </div>
                 </>
             )
@@ -42,9 +46,9 @@ class EditMovie extends Component {
 
         return (
             <div>
-                {/* <div> */}
-                    <h2>Edit:</h2>
+                <h2>Edit Movie</h2>
                 {movieDisplay}
+                <br />
                 {this.state.displayUpdateForm ? <UpdateEdits movie={this.props.reduxState.detailsReducer[0]} getMovieById={this.getMovieById}/> : ''}
             </div>
         )
