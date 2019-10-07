@@ -1,39 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import UpdateEdits from '../UpdateEdits/UpdateEdits';
 
 class EditMovie extends Component {
 
     state = {
-        editMovie: {
-            id: this.props.match.params.id,
-            title: '',
-            description: ''
-        }
+        displayUpdateForm: false
     }
 
-    // keeps changes made to input and textareas
-    inputChange = (event, propertyName) => {
-        console.log('inPutChange', event.target.value); 
-        this.setState({
-            editMovie: {
-            ...this.state.editMovie,
-            [propertyName]: event.target.value
-        }
-        })
+    // Renders the details on the DOM
+    componentDidMount() {
+        this.getMovieById();
     }
 
-    // navigate back to the details page
-    handleBack = () => {
-        console.log('in handleBack');
-        this.props.history.push(`/details/${this.props.match.params.id}`);
+    // Sends a dispatch to the Saga Watcher for the Grab Details type to match the id
+    getMovieById = () => {
+        this.props.dispatch( {type: 'GRAB_DETAILS', payload: this.props.match.params.id })
     }
 
-    // save changes made in edit
-    saveEdit = (event) => {
-        event.preventDefault();
-        console.log('Save');
-        this.props.dispatch( { type: 'UPDATE_MOVIE', payload: this.state.editMovie})
-    }
+    handleUpdate = () => {
+        this.setState({displayUpdateForm: true})
+      }
+
 
     render() {
         
@@ -41,17 +29,13 @@ class EditMovie extends Component {
         const movieDisplay = this.props.reduxState.detailsReducer.map( (movie, id) => {
             return (
                 <>
-                <div key={id}>
-                        <form id="changeForm" onSubmit={this.updateMovie} >
-                        <input onChange={(event) => {this.inputChange(event, 'title')}} defaultValue={movie.title}></input>
+                <div key={movie.id}>
+                        <p>Name: {movie.title}</p>
                         <br />
-                        <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" defaultValue={movie.description}></textarea>
+                        <p>Description: {movie.description}</p>
                         <br />
-                        <button onClick={this.saveEdit} type="submit">Save</button>
-                        </form>
-                        <br />
+                        <button onClick={() => { this.handleUpdate() }}>Make Changes</button>
                 </div>
-                <button onClick={this.handleBack}>Cancel</button>
                 </>
             )
         })
@@ -61,7 +45,7 @@ class EditMovie extends Component {
                 {/* <div> */}
                     <h2>Edit:</h2>
                 {movieDisplay}
-                <pre>{JSON.stringify(this.state)}</pre> 
+                {this.state.displayUpdateForm ? <UpdateEdits movie={this.props.reduxState.detailsReducer[0]} getMovieById={this.getMovieById}/> : ''}
             </div>
         )
     }
