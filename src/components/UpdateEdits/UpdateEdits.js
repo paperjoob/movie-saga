@@ -21,11 +21,6 @@ class UpdateEdits extends Component {
         })
     }
 
-    // navigate back to the details page
-    handleBack = () => {
-        this.props.history.push(`/details/${this.props.match.params.id}`);
-    }
-
     // save changes made in edit
     saveEdit = (event) => {
         event.preventDefault();
@@ -41,16 +36,15 @@ class UpdateEdits extends Component {
             return (
                 <>
                 <div key={movie.id}>
-                        <form id="changeForm" >
+                        <form id="changeForm" onSubmit={this.saveEdit}>
                         <input onChange={(event) => {this.inputChange(event, 'title')}} value={this.state.movieToUpdate.title}></input>
                         <br />
                         <textarea onChange={(event) => {this.inputChange(event, 'description')}} rows="12" cols="100" form="changeForm" value={this.state.movieToUpdate.description}></textarea>
                         <br />
-                        <button onClick={this.saveEdit} type="submit">Save</button>
+                        <button type="submit">Save</button>
                         </form>
                         <br />
                 </div>
-                <button onClick={this.handleBack}>Cancel</button>
                 </>
             )
         })

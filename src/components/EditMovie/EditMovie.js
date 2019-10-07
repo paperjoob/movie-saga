@@ -39,6 +39,7 @@ class EditMovie extends Component {
                     <textarea rows="15" cols="60" placeholder={movie.description}></textarea>
                     <br />
                     <button onClick={() => { this.handleUpdate() }}>Make Changes</button>
+                    <button onClick={() => {this.props.history.push(`/details/${this.props.match.params.id}`)}} >Cancel</button>
                 </div>
                 </>
             )
