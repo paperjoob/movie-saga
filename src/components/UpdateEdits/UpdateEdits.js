@@ -27,6 +27,7 @@ class UpdateEdits extends Component {
         this.props.dispatch( { type: 'UPDATE_MOVIE', payload: this.state.movieToUpdate});
         this.props.getMovieById();
         alert('Update successful');
+        this.props.history.push(`/details/${this.state.movieToUpdate.id}`)
     }
 
     render() {

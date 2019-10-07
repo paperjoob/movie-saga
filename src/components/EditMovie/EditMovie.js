@@ -50,7 +50,7 @@ class EditMovie extends Component {
                 <h2>Edit Movie</h2>
                 {movieDisplay}
                 <br />
-                {this.state.displayUpdateForm ? <UpdateEdits movie={this.props.reduxState.detailsReducer[0]} getMovieById={this.getMovieById}/> : ''}
+                {this.state.displayUpdateForm ? <UpdateEdits movie={this.props.reduxState.detailsReducer[0]} getMovieById={this.getMovieById} history={this.props.history}/> : ''}
             </div>
         )
     }
